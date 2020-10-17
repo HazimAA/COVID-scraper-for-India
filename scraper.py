@@ -29,7 +29,10 @@ with urllib.request.urlopen("https://www.mohfw.gov.in/data/datanew.json") as url
     # print(df)
 
 daily = pd.DataFrame(data).sort_values(by='state_name',ascending=True)
-daily.to_csv('C:\\Users\\HP\\Documents\\Data Scraped For COVID\\'+dd_MMM_yyyy+'.csv')
+# Example Path
+# daily.to_csv('C:\\Users\\HP\\Documents\\'+dd_MMM_yyyy+'.csv')
+daily.to_csv('##Update Path##'+dd_MMM_yyyy+'.csv')
+
 
 
 
@@ -56,4 +59,5 @@ totals.append(num)
 output_file_name_2 = dd_MMM_yyyy
 daily_test = pd.DataFrame(totals,columns = ['CUMULATIVE TOTAL SAMPLES TESTED','NO OF SAMPLES TESTED','DATE'])
 daily_test.set_index('DATE',inplace=True)
-daily_test.to_csv('C:\\Users\\HP\\Documents\\Data Scraped For COVID\\'+output_file_name_2+'(Testing).csv')
+# daily_test.to_csv('C:\\Users\\HP\\Documents\\'+output_file_name_2+'(Testing).csv')
+daily_test.to_csv('## Path ##'+output_file_name_2+'(Testing).csv')
