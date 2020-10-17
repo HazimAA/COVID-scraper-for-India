@@ -12,5 +12,6 @@ df = pd.read_json(url, orient = 'index')#.sort_values(by ='dates', axis=0, ascen
 df2 = pd.DataFrame(df['dates'].values.tolist(), index=df.index)
 
 #Saving Daily Totals for the whole Country
-df.to_csv('C:\\Users\\HP\\Documents\\Total COVID data accumulated by someone, scraped by me\\Daily_Totals_Latest_Country.csv')
-df2.to_json(r'C:\Users\HP\Documents\Total COVID data accumulated by someone, scraped by me\JSON Daily_Totals_Latest_Country')
+# UPDATE PATHS!!!
+df.to_csv('C:\\Users\\HP\\Documents\\Daily_Totals_Latest_Country.csv')
+df2.to_json(r'C:\Users\HP\Documents\JSON Daily_Totals_Latest_Country')
