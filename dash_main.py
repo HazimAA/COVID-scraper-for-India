@@ -13,7 +13,8 @@ from dash.dependencies import Input, Output
 pd.set_option('display.max_columns',None)
 pd.set_option('display.width', 250)
 
-df2 = pd.read_json('C:\\Users\\HP\\Documents\\Total COVID data accumulated by someone, scraped by me\\JSON Daily_Totals_Latest_Country')
+#Use the JSON File obtained from COVID_data..............
+df2 = pd.read_json('C:\\Users\\HP\\Documents\\JSON Daily_Totals_Latest_Country')
 df2.index.name = 'State Code'
 df2 = df2.sort_index(axis = 1, ascending=True)
 
