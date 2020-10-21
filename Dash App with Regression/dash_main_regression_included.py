@@ -2,29 +2,21 @@
 # Run this app with `python app.py` and
 # visit http://127.0.0.1:8050/ in your web browser.
 
-#for callback explanation
-#https://towardsdatascience.com/a-gentle-invitation-to-interactive-visualization-with-dash-a200427ccce9
-#cleaning up data
-#https://stackoverflow.com/questions/44050853/pandas-json-normalize-and-null-values-in-json
+
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
 import plotly.express as px
 import pandas as pd
 import datetime as dt
-# import flat_table
 from dash.dependencies import Input, Output
-# import requests
-# import urllib.request, json
+
 
 pd.set_option('display.max_columns',None)
 pd.set_option('display.width', 250)
 
 #Reading data from JSON stored in Local
-# state = input("Enter the state code / Totals Code: ")
-# date = input("Enter the date in YYYY-MM-DD format: ")
 
-#https://stackoverflow.com/questions/38231591/splitting-dictionary-list-inside-a-pandas-column-into-separate-columns
 df2 = pd.read_json('C:\\Users\\HP\\Documents\\Total COVID data accumulated by someone, scraped by me\\JSON Daily_Totals_Latest_Country')
 df2.index.name = 'State Code'
 df2 = df2.sort_index(axis = 1, ascending=True)
@@ -33,18 +25,13 @@ df2 = df2.sort_index(axis = 1, ascending=True)
 dates = df2.columns
 #To convert from Timestamp format, to dates
 labels = dates.map(pd.Timestamp.date)
+#To ordinal for enabling Regression Analysis
 xx = dates.map(dt.datetime.toordinal)
 
-# print(dates)
-#respective state and date data
-# df3 = pd.json_normalize(df2.loc[state,date], max_level= 1)
-#Time Series Data for range of dates
-# df3 = pd.json_normalize(df2.loc['TT','2020-01-30':'2020-09-25'])
 
 # #List of States
 available_indicators = list(df2.index.values)
 drop_down_opts = [{'label': i, 'value': i} for i in available_indicators]
-# # print(drop_down_opts)
 
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
@@ -56,8 +43,7 @@ colors = {
     'white': '#d4ffff',
     'black': '#CCFFFF'
 }
-#336666
-#
+
 ##Cleaning up null values so that all entries in the record can be read
 df2.loc['AN'] = df2.loc['AN'].apply(lambda x: {} if pd.isna(x) else x)
 df2.loc['AP'] = df2.loc['AP'].apply(lambda x: {} if pd.isna(x) else x)
@@ -96,11 +82,8 @@ df2.loc['UN'] = df2.loc['UN'].apply(lambda x: {} if pd.isna(x) else x)
 df2.loc['UP'] = df2.loc['UP'].apply(lambda x: {} if pd.isna(x) else x)
 df2.loc['UT'] = df2.loc['UT'].apply(lambda x: {} if pd.isna(x) else x)
 df2.loc['WB'] = df2.loc['WB'].apply(lambda x: {} if pd.isna(x) else x)
-#
-# # df3 = flat_table.normalize(df2.loc['TT'])
+
 df3 = pd.json_normalize(df2.loc['TT'], max_level= 1)
-# df3['dates'] = x
-# print(df3)
 
 # #Plotting the figure (confirmed vs recovered
 data =["delta.confirmed","delta.recovered"]
